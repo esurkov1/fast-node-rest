@@ -1,6 +1,6 @@
 {
   "name": "fast-node-rest",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "Fast and lightweight Node.js framework for building REST APIs with declarative routing, automatic error handling and built-in middleware support",
   "main": "index.js",
   "scripts": {

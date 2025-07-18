@@ -26,45 +26,6 @@
 npm install fast-node-rest
 ```
 
-## 🆕 Что изменилось в v1.4.0
-
-**NEW FEATURE:** Встроенный Health Check endpoint из коробки!
-
-### v1.4.0 - Health Check
-- ✅ **Автоматический `/health-check` endpoint** - готов к использованию
-- ✅ **Кастомизируемые данные** - статические и динамические 
-- ✅ **Uptime tracking** - автоматический подсчет времени работы
-- ✅ **Production ready** - для мониторинга и балансировщиков нагрузки
-
-### v1.3.0 - Monolithic Class
-**BREAKING CHANGE:** Убрана legacy API совместимость для упрощения архитектуры.
-
-### Миграция с v1.2.0 на v1.3.0
-
-**Было (v1.2.0):**
-```javascript
-const { server, sendSuccess, sendError, AuthMiddleware } = require('fast-node-rest');
-const auth = new AuthMiddleware({...});
-server({ port: 3000, routes });
-```
-
-**Стало (v1.3.0):**
-```javascript
-const FastNodeREST = require('fast-node-rest');
-
-// Простой запуск
-const app = await FastNodeREST.create({ port: 3000, routes });
-
-// Или полный контроль с JWT
-const server = new FastNodeREST({ 
-    port: 3000, 
-    JWT_SECRET: 'secret',
-    routes 
-});
-server.middleware.auth; // Встроенная аутентификация
-await server.start();
-```
-
 ## 🏁 Быстрый старт
 
 ### Вариант 1: Минимальный сервер
