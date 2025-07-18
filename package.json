@@ -1,7 +1,7 @@
 {
-  "name": "@esurkov1/simple-router",
+  "name": "fast-node-rest",
   "version": "1.0.0",
-  "description": "A lightweight Express.js router wrapper for rapid REST API development with built-in error handling and response formatting",
+  "description": "Fast and lightweight Node.js framework for building REST APIs with declarative routing, automatic error handling and built-in middleware support",
   "main": "index.js",
   "scripts": {
     "test": "node examples/basic-example.js",
@@ -9,25 +9,29 @@
     "dev": "nodemon examples/basic-example.js"
   },
   "keywords": [
-    "express",
-    "router",
+    "fast",
+    "node",
     "rest",
     "api",
+    "express",
+    "router",
     "server",
     "middleware",
     "lightweight",
-    "simple"
+    "framework",
+    "declarative",
+    "quick"
   ],
   "author": "esurkov1",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/esurkov1/simple-router.git"
+    "url": "git+https://github.com/esurkov1/fast-node-rest.git"
   },
   "bugs": {
-    "url": "https://github.com/esurkov1/simple-router/issues"
+    "url": "https://github.com/esurkov1/fast-node-rest/issues"
   },
-  "homepage": "https://github.com/esurkov1/simple-router#readme",
+  "homepage": "https://github.com/esurkov1/fast-node-rest#readme",
   "dependencies": {
     "express": "^4.18.2",
     "cookie-parser": "^1.4.6"

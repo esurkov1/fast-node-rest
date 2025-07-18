@@ -1,9 +1,9 @@
-# Simple Express Router
+# Fast Node REST
 
-[![npm version](https://badge.fury.io/js/@esurkov1/simple-router.svg)](https://badge.fury.io/js/@esurkov1/simple-router)
+[![npm version](https://badge.fury.io/js/fast-node-rest.svg)](https://badge.fury.io/js/fast-node-rest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Легковесная обёртка над Express.js для быстрого создания REST API с встроенной обработкой ошибок, форматированием ответов и рекурсивной регистрацией маршрутов.
+Быстрый и легковесный фреймворк для создания REST API на Node.js с декларативными маршрутами, автоматической обработкой ошибок и встроенными middleware.
 
 ## 🚀 Особенности
 
@@ -18,13 +18,13 @@
 ## 📦 Установка
 
 ```bash
-npm install @esurkov1/simple-router
+npm install fast-node-rest
 ```
 
 ## 🏁 Быстрый старт
 
 ```javascript
-const { server } = require('@esurkov1/simple-router');
+const { server } = require('fast-node-rest');
 
 const routes = {
     health: {
@@ -102,7 +102,7 @@ server({
 ### Базовый CRUD API
 
 ```javascript
-const { server } = require('@esurkov1/simple-router');
+const { server } = require('fast-node-rest');
 
 const routes = {
     api: {
@@ -161,7 +161,7 @@ server({ port: 3000, routes });
 ### Аутентификация и middleware
 
 ```javascript
-const { server } = require('@esurkov1/simple-router');
+const { server } = require('fast-node-rest');
 
 // Middleware для проверки токена
 const authMiddleware = (req, res, next) => {
@@ -344,7 +344,7 @@ NODE_ENV=production
 
 ## 🐛 Баги и предложения
 
-Если нашли баг или хотите предложить улучшение, создайте [issue](https://github.com/esurkov1/simple-router/issues).
+Если нашли баг или хотите предложить улучшение, создайте [issue](https://github.com/esurkov1/fast-node-rest/issues).
 
 ## 📚 Дополнительные ресурсы
 
