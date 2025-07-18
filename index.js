@@ -52,13 +52,23 @@ class FastNodeREST {
     }
 
     sendError(res, error, status = 400) {
-        const errorResponse = {
-            error: {
-                message: error?.message || 'An error occurred',
-                ...(error?.field && { field: error.field }),
-                ...(error?.extra && error.extra)
-            }
+        // Служебные поля Error, которые не нужны в API ответе
+        const excludeFields = new Set(['name', 'stack', 'constructor', 'toString', 'valueOf']);
+        
+        const errorData = {
+            message: error?.message || 'An error occurred'
         };
+
+        // Добавляем все кастомные поля из ошибки
+        if (error && typeof error === 'object') {
+            for (const key in error) {
+                if (!excludeFields.has(key) && key !== 'message') {
+                    errorData[key] = error[key];
+                }
+            }
+        }
+
+        const errorResponse = { error: errorData };
         res.status(status).json(errorResponse);
     }
 
