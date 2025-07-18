@@ -11,6 +11,10 @@ class FastNodeREST {
         cors = true,
         security = true,
         jsonLimit = '10mb',
+        // Health check настройки
+        healthCheck = true,
+        healthCheckPath = '/health-check',
+        healthCheckData = null,
         // JWT настройки
         JWT_SECRET = null,
         JWT_REFRESH = null,
@@ -26,6 +30,9 @@ class FastNodeREST {
             cors,
             security,
             jsonLimit,
+            healthCheck,
+            healthCheckPath,
+            healthCheckData,
             JWT_SECRET,
             JWT_REFRESH,
             JWT_SERVICE,
@@ -35,6 +42,7 @@ class FastNodeREST {
 
         this.app = null;
         this.serverInstance = null;
+        this.startTime = null;
     }
 
     // ===== UTILITY МЕТОДЫ =====
@@ -286,6 +294,38 @@ class FastNodeREST {
         }, 404);
     };
 
+    // ===== HEALTH CHECK =====
+
+    createHealthCheckEndpoint() {
+        if (!this.config.healthCheck) return;
+
+        const healthPath = this.config.healthCheckPath;
+        
+        if (this.config.enableLogging) {
+            console.log(`[Health] GET ${healthPath}`);
+        }
+
+        this.app.get(healthPath, (req, res) => {
+            const uptime = this.startTime ? Date.now() - this.startTime : 0;
+            
+            const healthData = {
+                status: 'healthy',
+                timestamp: new Date().toISOString(),
+                uptime: `${Math.floor(uptime / 1000)}s`,
+                version: require('./package.json').version || 'unknown',
+                service: 'fast-node-rest',
+                ...(this.config.healthCheckData && typeof this.config.healthCheckData === 'object' 
+                    ? this.config.healthCheckData 
+                    : {}),
+                ...(typeof this.config.healthCheckData === 'function' 
+                    ? this.config.healthCheckData(req) 
+                    : {})
+            };
+
+            this.sendSuccess(res, healthData);
+        });
+    }
+
     // ===== CORE SERVER МЕТОДЫ =====
 
     validateConfig() {
@@ -348,6 +388,7 @@ class FastNodeREST {
 
     async start() {
         this.validateConfig();
+        this.startTime = Date.now();
 
         this.app = express();
 
@@ -374,7 +415,10 @@ class FastNodeREST {
             next(err);
         });
 
-        // Parse routes
+        // Health check endpoint (before user routes)
+        this.createHealthCheckEndpoint();
+
+        // Parse user routes
         this.parseRoutes(this.config.routes);
         
         // Error handlers

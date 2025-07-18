@@ -209,7 +209,13 @@ async function startServer() {
             port: PORT,
             prefix: '',
             routes,
-            enableLogging: true
+            enableLogging: true,
+            // Встроенный health check
+            healthCheck: true,
+            healthCheckData: {
+                environment: process.env.NODE_ENV || 'development',
+                features: ['routing', 'middleware', 'health-check']
+            }
         });
 
         // Запуск сервера
@@ -219,6 +225,7 @@ async function startServer() {
 🚀 Basic Example Server started on http://localhost:${PORT}
 
 Available endpoints:
+- GET  /health-check (built-in health check)
 - GET  /health
 - POST /api/v1/auth/login
 - POST /api/v1/auth/register
@@ -231,6 +238,7 @@ Available endpoints:
 - POST /api/v1/posts/error (error testing)
 
 Example requests:
+curl http://localhost:${PORT}/health-check
 curl http://localhost:${PORT}/health
 curl -X POST http://localhost:${PORT}/api/v1/auth/login -H "Content-Type: application/json" -d '{"username":"test","password":"123"}'
 curl -X POST http://localhost:${PORT}/api/v1/posts/error

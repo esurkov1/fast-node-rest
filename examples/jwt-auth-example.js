@@ -29,6 +29,13 @@ const server = new FastNodeREST({
             ['http://localhost:3000', 'http://localhost:3001'],
         credentials: true
     },
+    // Встроенный health check с JWT информацией
+    healthCheck: true,
+    healthCheckData: {
+        environment: process.env.NODE_ENV || 'development',
+        features: ['jwt', 'auth', 'refresh-tokens', 'service-tokens'],
+        jwtConfigured: !!(JWT_CONFIG.JWT_SECRET && JWT_CONFIG.JWT_REFRESH)
+    },
     ...JWT_CONFIG // Передаем JWT настройки
 });
 
@@ -303,6 +310,7 @@ Test Users:
 - user/user123 (user role)
 
 Available endpoints:
+- GET    /health-check (built-in health check)
 - GET    /health
 - POST   /api/v1/auth/login
 - POST   /api/v1/auth/logout (requires auth)

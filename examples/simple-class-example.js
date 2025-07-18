@@ -1,8 +1,8 @@
 const FastNodeREST = require('../index.js');
 
-// ===== ПРИМЕР 1: Минимальный сервер =====
+// ===== ПРИМЕР 1: Минимальный сервер с health-check =====
 
-console.log('=== EXAMPLE 1: Minimal Server ===');
+console.log('=== EXAMPLE 1: Minimal Server with Health Check ===');
 
 const simpleRoutes = {
     hello: {
@@ -20,9 +20,17 @@ const simpleRoutes = {
 FastNodeREST.create({
     port: 3051,
     routes: simpleRoutes,
-    enableLogging: false
+    enableLogging: false,
+    // Health check с кастомными данными
+    healthCheck: true,
+    healthCheckPath: '/health-check',
+    healthCheckData: {
+        environment: 'demo',
+        features: ['routing', 'health-check']
+    }
 }).then(server => {
     console.log('✅ Simple server running on port 3051');
+    console.log('🔍 Health check available at http://localhost:3051/health-check');
     
     // Остановка через 5 секунд для демо
     setTimeout(() => {
@@ -43,7 +51,14 @@ function runExample2() {
         prefix: '/api',
         JWT_SECRET: 'demo-secret',
         JWT_REFRESH: 'demo-refresh-secret',
-        enableLogging: false
+        enableLogging: false,
+        // Health check с функциональными данными
+        healthCheck: true,
+        healthCheckData: (req) => ({
+            userAgent: req.headers['user-agent'],
+            connections: Math.floor(Math.random() * 100),
+            memory: process.memoryUsage()
+        })
     });
 
     // Устанавливаем маршруты после создания сервера
@@ -194,13 +209,18 @@ async function demoApiCalls() {
     const fetch = require('http').request;
     
     try {
+        // Проверка health check
+        console.log('1. Checking health endpoint...');
+        const healthCheck = await makeRequest('GET', 3053, '/health-check');
+        console.log('✅ Health check passed:', healthCheck.status);
+        
         // Создание service токена
-        console.log('1. Creating service token...');
+        console.log('2. Creating service token...');
         const serviceToken = await makeRequest('POST', 3053, '/v1/tokens/service', { serviceName: 'demo-service' });
         console.log('✅ Service token created');
         
         // Использование service токена
-        console.log('2. Using service token...');
+        console.log('3. Using service token...');
         await makeRequest('GET', 3053, '/v1/internal/status', null, {
             'Authorization': `Bearer ${serviceToken.serviceToken}`
         });
