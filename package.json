@@ -1,0 +1,46 @@
+{
+  "name": "simple-express-router",
+  "version": "1.0.0",
+  "description": "A lightweight Express.js router wrapper for rapid REST API development with built-in error handling and response formatting",
+  "main": "index.js",
+  "scripts": {
+    "test": "node examples/basic-example.js",
+    "start": "node examples/basic-example.js",
+    "dev": "nodemon examples/basic-example.js"
+  },
+  "keywords": [
+    "express",
+    "router", 
+    "rest",
+    "api",
+    "server",
+    "middleware",
+    "lightweight",
+    "simple"
+  ],
+  "author": "esurkov1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/esurkov1/simple-router.git"
+  },
+  "bugs": {
+    "url": "https://github.com/esurkov1/simple-router/issues"
+  },
+  "homepage": "https://github.com/esurkov1/simple-router#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cookie-parser": "^1.4.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ]
+} 
