@@ -10,7 +10,7 @@
   },
   "keywords": [
     "express",
-    "router", 
+    "router",
     "rest",
     "api",
     "server",
@@ -22,7 +22,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/esurkov1/simple-router.git"
+    "url": "git+https://github.com/esurkov1/simple-router.git"
   },
   "bugs": {
     "url": "https://github.com/esurkov1/simple-router/issues"
@@ -43,4 +43,4 @@
     "README.md",
     "LICENSE"
   ]
-} 
+}
