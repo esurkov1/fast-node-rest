@@ -55,4 +55,4 @@ Thumbs.db
 
 # Build output
 dist/
-build/ 
+build/ cookies.txt
