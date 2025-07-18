@@ -1,6 +1,6 @@
 # Simple Express Router
 
-[![npm version](https://badge.fury.io/js/simple-express-router.svg)](https://badge.fury.io/js/simple-express-router)
+[![npm version](https://badge.fury.io/js/@esurkov1/simple-router.svg)](https://badge.fury.io/js/@esurkov1/simple-router)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Легковесная обёртка над Express.js для быстрого создания REST API с встроенной обработкой ошибок, форматированием ответов и рекурсивной регистрацией маршрутов.
@@ -18,13 +18,13 @@
 ## 📦 Установка
 
 ```bash
-npm install simple-express-router
+npm install @esurkov1/simple-router
 ```
 
 ## 🏁 Быстрый старт
 
 ```javascript
-const { server } = require('simple-express-router');
+const { server } = require('@esurkov1/simple-router');
 
 const routes = {
     health: {
@@ -102,7 +102,7 @@ server({
 ### Базовый CRUD API
 
 ```javascript
-const { server } = require('simple-express-router');
+const { server } = require('@esurkov1/simple-router');
 
 const routes = {
     api: {
@@ -161,7 +161,7 @@ server({ port: 3000, routes });
 ### Аутентификация и middleware
 
 ```javascript
-const { server } = require('simple-express-router');
+const { server } = require('@esurkov1/simple-router');
 
 // Middleware для проверки токена
 const authMiddleware = (req, res, next) => {

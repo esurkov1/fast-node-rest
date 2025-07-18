@@ -1,5 +1,5 @@
 {
-  "name": "simple-express-router",
+  "name": "@esurkov1/simple-router",
   "version": "1.0.0",
   "description": "A lightweight Express.js router wrapper for rapid REST API development with built-in error handling and response formatting",
   "main": "index.js",
